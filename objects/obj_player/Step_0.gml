@@ -17,11 +17,47 @@ vy = ((mv_Down - mv_Up) * walkSpeed);
 
 // idle state
 if (vx == 0 && vy == 0){
-	// do nothing rn
+	// Change the idle Sprite based on last direction
+	switch dir{
+		case 0: {
+			sprite_index = spr_player_idle_right_strip04;
+			break;
+		}
+		case 1:{
+			sprite_index = spr_player_idle_up_strip04;
+			break;
+		}
+		case 2:{
+			sprite_index = spr_player_idle_left_strip04;
+			break;
+		}
+		case 3:{
+			sprite_index = spr_Player_idle_down;
+			break;
+		}
+	}
 }
 
 // moving state
 if (vx != 0 || vy != 0){
 	x += vx;
 	y += vy;
+	
+	// Change walking sprite based on direction
+	if (vx > 0) {
+		sprite_index = spr_player_walk_right_strip04;
+		dir = 0;
+	}
+	if (vx < 0){
+		sprite_index = spr_player_walk_left_strip04;
+		dir = 2;
+	}
+	if (vy > 0){
+		sprite_index = spr_player_walk_down_strip04;
+		dir = 3;
+	}
+	if (vy < 0){
+		sprite_index = spr_player_walk_up_strip04;
+		dir = 1;
+	}
 }
